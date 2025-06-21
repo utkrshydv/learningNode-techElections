@@ -1,0 +1,46 @@
+what? 
+
+ a website where people can vote for their favourite tech creators
+
+ functionality? 
+
+ 1. voter sign in / sign up
+ 2. list of candidates
+ 3. one email id -> one vote
+ 4. one route -> shows live ranking
+
+ 5. email id unique identity
+ 6. admin maintains the table of candidates
+ 7. users can change their password
+
+ 8 user can login only with their email id and password
+
+ 9. admin cant vote 
+
+ routes ->
+
+ user authentication -> 
+
+ /signup: post -create a new account
+ /login: post - log in to an existin account
+
+ voting:
+  /candidate: get -> get list of candidate
+  /vote:/candidateId: post -> vote for a candidate
+
+  /vote/counts: get -> gets the list of candidates sorted by their vote counts
+
+user profile: 
+  /profile: get -> get user details
+  /profile/password: put -> change user password
+
+Admin:
+ /candidates: post -> create new candidate
+ /candidates/candidate: put -> update an existing candidate
+
+ /candidates/candidateid: delete -> delete a candidate from list
+
+
+
+ further routes for implementation : 
+ /candidates/:candidateId: get -> get details about the candidate
