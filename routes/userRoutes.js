@@ -64,7 +64,7 @@ router.get('/profile', jwtAuthMiddleWare, async(req, res)=> {
 
     res.status(200).json({user});
   } catch(err){
-    res.status(500).json({eroor: 'Internal server error'})
+    res.status(500).json({error: 'Internal server error'})
   }
 })
 
@@ -83,7 +83,7 @@ router.put('/profile/password', jwtAuthMiddleWare, async (req, res) => {
   user.password = newPassword
   await user.save()
 
-  return res.status(200).json({message: 'password updated'})
+  return res.status(200).json({message: 'password updated', newPassword: newPassword})
 } catch(err){
   console.log(err)
   res.status(500).json({error: 'Internal Server Error'})
