@@ -114,4 +114,70 @@ router.delete('/:candidateId', jwtAuthMiddleWare, async (req, res) => {
   }
 })
 
+//vote for a candidate
+
+router.post('/vote/:candidateId', jwtAuthMiddleWare, async (req, res) => {
+  const candidateId = req.params.candidateId;
+  const userId = req.user.id;
+
+  try{
+    const candidate = await Candidate.findById(candidateId);
+
+    if(!candidate){
+      return res.status(404).json({message: "candidate not found"});
+    }
+
+    const user = await User.findById(userId);
+    if(!user){
+      return res.status(404).json({message: "user not found"});
+    }
+
+    if(user.hasVoted){
+      return res.status(400).json({message: "you have already voted"});
+    }
+
+    if(user.role == 'admin'){
+      return res.status(403).json({message: "admins can't vote"})
+    }
+
+    candidate.votes.push({user: userId})
+    candidate.voteCount++;
+    await candidate.save();
+
+    user.hasVoted = true
+    await user.save();
+
+    res.status(200).json({message: "vote recorded successfully"});
+
+
+  } catch(err){
+    console.log(err);
+    res.status(500).json({erorr: 'Internal Server Error'})
+  }
+})
+
+//get vote count
+
+router.get('/vote/count', async (req, res) => {
+
+  try{
+    const candidate = await Candidate.find().sort({voteCount: -1});
+
+    const record = candidate.map((data) => {
+      return{
+        name: data.name,
+        voteCount: data.voteCount
+      }
+    });
+
+    return res.status(200).json(record);
+
+
+  }catch(err){
+     console.log(err);
+    res.status(500).json({erorr: 'Internal Server Error'})
+  }
+
+})
+
 module.exports = router;
