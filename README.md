@@ -34,13 +34,7 @@ This project is a voting application backend built using **Node.js**, **Express*
 - Candidate schema includes vote count and individual vote logs
 - Admin routes protected for candidate management
 
-## Environment Variables
 
-The following environment variable is required:
-
-```
-
-```
 
 ## Learning Outcomes
 
@@ -51,9 +45,4 @@ This project served as a practical introduction to backend development with Node
 - **Data Modeling with Mongoose**: Structured schemas with validations and relationships between users and candidates.
 - **Password Security**: Implemented password hashing and secure storage using bcrypt.
 - **Role-Based Access Control**: Handled different user privileges and access levels cleanly.
-
-This project strengthened foundational skills in backend architecture, database integration, and secure user authentication.
-```
-
----
 
